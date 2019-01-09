@@ -20,7 +20,6 @@ public class EasyPathConfig {
    * reference functions as a Java parameter/argument, please see the example code that is linked in
    * the readme of the project on GitHub.
    *
-   * @param subsystem The subsystem that requires(..) will be called on in the FollowPath command.
    * @param setLeftRightDriveSpeedFunction the function that sets the left and right drive train
    * speeds; takes in two doubles for arguments and returns nothing
    * @param getInchesTraveledFunction the function that returns a double that represents the total
@@ -170,12 +169,4 @@ public class EasyPathConfig {
     return swapDrivingDirection;
   }
 
-  /**
-   * Getter for subsystem that uses the path.
-   *
-   * @return the subsystem object that requires(...) will be called on.
-   */
-  public Subsystem getSubsystem() {
-    return subsystem;
-  }
 }
