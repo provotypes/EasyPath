@@ -13,7 +13,30 @@ EasyPath is a library that allows FRC robots to easily navigate along complex pa
 typically located at `C:\Users\<USERNAME>\wpilib\user\java\lib`. Make sure you tell eclipse about it,
 which [you can search for easily online](https://www.google.com/search?q=eclipse+include+external+jar&oq=eclipse+include+ext&aqs=chrome.0.35i39j69i57j0l4.2350j0j7&sourceid=chrome&ie=UTF-8).
 
-**For 2019** - t.b.d. Check back in a bit!
+**For 2019** - Download the latest `.jar` file in the releases tab and put the `.jar` file in your VS Code project.  (I.e., if your project is at `~/2019-code`, put it at `~/2019-code/EasyPath-version.jar`.)  Pull up the `build.gradle` file in your main project directory (in our example, it should live at `~/2019-code/build.gradle`).  Towards the end (around line 47) you should see a section that looks like this:
+
+```
+dependencies {
+    compile wpi.deps.wpilib()
+    compile wpi.deps.vendor.java()
+    nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+    testCompile 'junit:junit:4.12'
+}
+```
+
+Add the line `compile files('libs/EasyPath-version.jar')` to the dependencies section, so that it looks like this:
+
+```
+dependencies {
+    compile files('libs/EasyPath-0.6-alpha.jar')
+    compile wpi.deps.wpilib()
+    compile wpi.deps.vendor.java()
+    nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+    testCompile 'junit:junit:4.12'
+}
+```
 
 After you've done that, check out the setup instructions at [`docs/Setup.md`](https://github.com/tervay/EasyPath/blob/master/docs/Setup.md)
 to learn more about how to set it up on your robot. There are also docs on tuning the P loop and
