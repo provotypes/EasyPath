@@ -1,13 +1,13 @@
 package easypath;
 
-import edu.wpi.first.wpilibj.command.Command;
+
 
 import java.util.function.Function;
 
 /**
  * This class is the command you run in order to have your robot follow along a path.
  */
-public class FollowPath extends Command {
+public class FollowPath {
 
   private Path path;
   private Function<Double, Double> speedFunction;
@@ -87,7 +87,6 @@ public class FollowPath extends Command {
     this.speedFunction = speedFunction;
     this.shiftAt = shiftAt;
     this.shifted = false;
-    requires(EasyPath.getConfig().getSubsystem());
   }
 
   /**
@@ -145,8 +144,7 @@ public class FollowPath extends Command {
   /**
    * Calls the reset encoders function that you provided. {@inheritDoc}
    */
-  @Override
-  protected void initialize() {
+  public void initialize() {
     EasyPath.getConfig().getResetEncodersAndGyroFunction().run();
   }
 
@@ -154,8 +152,7 @@ public class FollowPath extends Command {
    * Calculates how the robot should drive and applies it to the drive train via the method that you
    * provided to EasyPath. {@inheritDoc}
    */
-  @Override
-  protected void execute() {
+  public void execute() {
     EasyPathConfig config = EasyPath.getConfig();
     double error = -calculateAngleDelta(config.getGetCurrentAngleFunction().get());
     double speed = calculateSpeed();
@@ -204,8 +201,7 @@ public class FollowPath extends Command {
    *
    * @return true if the robot has driven the total length of the path; false otherwise
    */
-  @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     try {
       return Math.abs(EasyPath.getConfig().getGetInchesTraveledFunction().get()) > path.getLength();
     } catch (Exception e) {
@@ -217,16 +213,8 @@ public class FollowPath extends Command {
   /**
    * At the end of the command, set the left and right drive train speeds to 0. {@inheritDoc}
    */
-  @Override
-  protected void end() {
+  public void end() {
     EasyPath.getConfig().getSetLeftRightDriveSpeedFunction().accept(0.0, 0.0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setName(String subsystem, String name) {
-    super.setName(subsystem, name);
-  }
 }
