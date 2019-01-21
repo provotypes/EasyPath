@@ -43,8 +43,9 @@ public class EasyPathConfig {
   ) {
     this(setLeftRightDriveSpeedFunction, getInchesTraveledFunction,
         getCurrentAngleFunction,
-        resetEncodersAndGyroFunction, () -> {
-        }, kP);
+        () -> {},
+        resetEncodersAndGyroFunction,
+        kP);
   }
 
   /**
